@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "docs/my-form-app",
+            "outputPath": "dist/my-form-app",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
