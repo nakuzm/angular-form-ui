@@ -1,0 +1,35 @@
+<ng-container *ngIf="fields$ | async as fields; else loading">
+  <form [formGroup]="dynamicForm" (ngSubmit)="onSubmit()" novalidate>
+    <div class="mb-3" *ngFor="let field of fields">
+      <label class="form-label">{{ field.label }}</label>
+      <ng-container [ngSwitch]="field.fieldType">
+        <app-custom-select-control
+          [options]="field.options!"
+          [formControlName]="field.key"
+          *ngSwitchCase="'countrySelect'"></app-custom-select-control>
+        <app-custom-input-control
+          [type]="field.type"
+          [formControlName]="field.key"
+          *ngSwitchDefault></app-custom-input-control>
+      </ng-container>
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button class="btn btn-primary" type="button" disabled  *ngIf="(formState$|async)?.isLoading; else submitButton">
+        <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+        <span role="status">Loading...</span>
+      </button>
+      <ng-template #submitButton>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </ng-template>
+    </div>
+  </form>
+  <div class="alert alert-success mt-2" role="alert" *ngIf="(formState$|async)?.isSuccess">
+    The form has been successfully submitted!
+  </div>
+  <div class="alert alert-danger mt-2" role="alert" *ngIf="(formState$|async)?.isError">
+    Something went wrong :(
+  </div>
+</ng-container>
+<ng-template #loading>
+  Loading...
+</ng-template>

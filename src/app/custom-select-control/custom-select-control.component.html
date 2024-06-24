@@ -1,0 +1,8 @@
+<select
+  class="form-select"
+  #select
+  (change)="onChange($any($event.target).value)"
+  (blur)="onTouched()">
+  <option selected>Open this select menu</option>
+  <option [value]="option" *ngFor="let option of options">{{ option }}</option>
+</select>

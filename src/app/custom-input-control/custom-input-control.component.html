@@ -1,0 +1,7 @@
+<input
+  [attr.type]="type"
+  autocomplete="off"
+  #input
+  (change)="onChangeHandler($event)"
+  (blur)="onTouched()"
+  class="form-control"/>
